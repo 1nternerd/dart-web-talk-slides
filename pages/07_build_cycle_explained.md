@@ -1,10 +1,12 @@
 ---
-layout: two-cols
+layout: two-col-one-header
 preload: false
 class: h-full w-full px-4
 ---
+::header::
+# Rendering a Dart Web app
 
-# How does it render?
+::default::
 
 <div class="relative" v-if="$clicks < 7 || $clicks >= 14">
 
@@ -70,6 +72,8 @@ class: h-full w-full px-4
 <div v-if="$clicks >= 7 && $clicks < 14">
 
 ```dart
+// root hydration
+
 void runApp(
     Widget Function(Map<String, String>) builder,
     Element? target
@@ -86,6 +90,8 @@ void runApp(
 ```
 
 </div>
+
+
 
 ::right::
 
@@ -122,9 +128,8 @@ void runApp(
 
 ```
 
-```dart {all|5|7|9-11|12|14|all}
+```dart {all|4|6|8-10|11|13|all}
 // stateless hydration
-
 
 HtmlElement hydrate(BuildContext context) {
     context.widget = this;
@@ -141,7 +146,7 @@ HtmlElement hydrate(BuildContext context) {
 
 ```
 
-```dart {all|6|7-12|13-18|19-21|all}
+```dart {all|6|7-12|13-17|18-20|all}
 // widget rendering
 
 HtmlElement render(
@@ -158,12 +163,54 @@ HtmlElement render(
     if (context.element != null && 
         context.element?.parentNode != null) {
       context.element!.replaceWith(el);
-      return context.element!;
     }
 
     context.element = el;
     return context.element!;
   }
+
+```
+
+```dart {all|8|10|12-15|16-18|all}
+// stateful components
+
+abstract class State<T extends StatefulWidget> {
+  final BuildContext context;
+
+  Widget get widget => context.widget! as T;
+
+  State(this.context);
+
+  Widget build(BuildContext context);
+
+  void setState(VoidCallback callback) {
+    // ...
+  }
+
+  void render(HtmlElement child) {
+    widget.render(context, [child]);
+  }
+}
+
+```
+
+```dart {all|7|9-13|all}
+// stateful components
+
+abstract class State<T extends StatefulWidget> {
+  // ...
+
+  void setState(VoidCallback callback) {
+    callback.call();
+
+    final child = build(context);
+    final childCtx = BuildContext.fromParent(context);
+    context.child = childCtx;
+    final c = child.hydrate(childCtx);
+
+    return render(c);
+  }
+}
 
 ```
 

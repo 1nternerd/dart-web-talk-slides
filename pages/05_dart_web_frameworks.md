@@ -74,7 +74,7 @@ void main() => deact(
             incrementor(),
             display(),
         ],
-        ));
+    ));
 
 DeactNode incrementor() => fc((ctx) {
       final counter = ctx.globalState<int>('counter');
