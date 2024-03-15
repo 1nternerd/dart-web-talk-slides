@@ -1,11 +1,5 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# Dart Web talk slides
 
-To start the slide show:
+This repo contains the [sli.dev](https://sli.dev) slides to my talk about Dart Web and how web frameworks can work in a web context.  
 
-- `npm install`
-- `npm run dev`
-- visit http://localhost:3030
-
-Edit the [slides.md](./slides.md) to see the changes.
-
-Learn more about Slidev on [documentations](https://sli.dev/).
+The slide notes are written as HTML comments in the markdown files in `pages/*` and contain some (hopefully most relevant stuff) that I told during my talk.

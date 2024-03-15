@@ -14,8 +14,11 @@
 
 
 <!--
-The plans for dart initially:
+The initial plans for Dart included:
 - make Javascript typesafe
+- integrating the Dart VM into Chromium
 
-When Dart would be embedded in browser engines it would probably have been superior
+Regarding the  package deprecations see the official migration guide on how and why to migrate:
+- https://dart.dev/interop/js-interop/package-web
+
 -->

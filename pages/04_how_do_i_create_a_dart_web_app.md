@@ -54,5 +54,20 @@ dart-web-example/
 </div>
 
 <!--
-Transition text: Now, building the application manually with the overhead of handling state is mostly tedious work, thus we have ... frameworks for the rescue
+`dart create` works similarly to `flutter create` and has a `-t/--template` flag.  
+
+Note: you will likely need the `build_web_compilers` pacakge in order for the build_runner to be able to build actual JS from your dart source.
+
+```yaml
+dependencies:
+  build_runner: <VERSION>
+  build_web_compilers: <VERSION>
+```
+
+You can also run the web application with `webdev` - a dart global binary doing multiple tasks for you.  
+To use it you need to `activate` it via:  
+
+```sh
+dart pub global activate webdev
+```
 -->

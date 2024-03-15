@@ -44,9 +44,11 @@ void main() {
 </div>
 
 <!--
-Magic:
-- Also using event listeners on element does create weird memory references, thus you cannot simply remove the same event listener
+Dart Web had some issues handling event listeners on elements.  
+If you use the standard element.addEventListener method you won't be able to remove these listeners again.
+  - It seemingly creates weird memory references, thus JS does not know which method to remove as event listener
+  - Alternatively: You will need to listen to the event stream of the desired event
 
-dart:html will likely get deprecated in Dart 3.4.0; projects scaffolded with Dart 3.3.0 or bigger will already use package:web
+`dart:html` will likely get deprecated in Dart 3.4.0; projects scaffolded with Dart 3.3.0 or bigger will already use `package:web`
 
 -->

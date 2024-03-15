@@ -22,6 +22,7 @@ When building Widgets we want to have the comfort to only return our business lo
 Therefore most frameworks will abstract away methods like `render`/`inflate`/`hydrate`.  
 These methods take care of linking the widgets in the widget/context tree, `build`ing the widget and returning a renderable HTML element.
 
-To allow our applications to keep state we utilise `StatefulWidget`s that - through their `setState` method - rebuild the widgets that are affected by such a call.
+To allow our applications to keep state we utilise `StatefulWidget`s that - through their `setState` method - rebuild the widgets that are affected by such a call.  
+Note: for an efficient framework, there are a lot more details to be implemented than just rerendering children whenever stuff changes. You would likely want to start by adding dependcy tracking and some way of managing lifecycle of widgets (ie. for cleaning up resources)
 
 -->

@@ -216,3 +216,33 @@ abstract class State<T extends StatefulWidget> {
 
 
 ````
+
+<!--
+## Root render loop
+
+Now when we want to actually render an HTML document from Dart we need to have a thought about how we can build a DOM tree - being a recursive datastructure - and at some point append the rendered HTMLOutput to the browsers actual DOM.  
+
+We do that by actually building the root widget, and using the aforementioned hydration/inflation methods we can recursively traverse our `Widget` class implementations telling each widget to build itself, hydrate and render itself. (with the given children)  
+This is basically everything that we need to have an initial static render of an arbitrarily deep HTML app.
+
+## Widget hydration/inflation
+
+The widget hydration works pretty much the same as the initial root render, but it is handed a BuildContext (which is already the _hydrating widgets_ context). When you hydrate your children make sure that you hand them a childContext and link the parent and children widgets in the BuildContext tree.
+
+Other than that, the loop is pretty much the same as the initial render.
+
+## Rendering widgets
+
+Now rendering a widget actually involves the DOM present in Darts' runtime.  
+We access the document we live in and call `createElement` (which maps directly to JSs' `createElement` method). From there on we proceed to append the given children and at the end return our own - now - Node (to allow the parent widget to append our output)
+
+Note: for rendering actual HTMLElements we want to add listeners and attributes to the Dart types, so the render method there will look a little different.
+
+## Setting state
+
+To make our stuff somehwat interactive, we need some state handling, which allow rebuilds of our UI with new data.  
+
+In the most naive case you will end up with an implementation that is basically a hydration call from within a widget tree element, rebuilding _all_* its children and replacing itself in the DOM.
+
+*= That can get very expensive renderwise, so tracking which components actually need to rebuild would be crucial for a production-grade framework.
+-->
